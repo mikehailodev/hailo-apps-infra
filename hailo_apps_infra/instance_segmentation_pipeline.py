@@ -48,18 +48,18 @@ class GStreamerInstanceSegmentationApp(GStreamerApp):
         self.video_height = 640
 
         # Determine the architecture if not specified
-        if args.arch is None:
+        if self.options_menu.arch is None:
             detected_arch = detect_hailo_arch()
             if detected_arch is None:
                 raise ValueError("Could not auto-detect Hailo architecture. Please specify --arch manually.")
             self.arch = detected_arch
             print(f"Auto-detected Hailo architecture: {self.arch}")
         else:
-            self.arch = args.arch
+            self.arch = self.options_menu.arch
 
         # Set the HEF file path based on the architecture
-        if args.hef_path:
-            self.hef_path = args.hef_path
+        if self.options_menu.hef_path:
+            self.hef_path = self.options_menu.hef_path
         elif self.arch == "hailo8":
             self.hef_path = os.path.join(self.current_path, '../resources/yolov5m_seg.hef')
         else:  # hailo8l
