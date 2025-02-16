@@ -207,7 +207,6 @@ class GStreamerApp:
 
         # Disable QoS to prevent frame drops
         disable_qos(self.pipeline)
-
         # Start a subprocess to run the display_user_data_frame function
         if self.options_menu.use_frame:
             display_process = multiprocessing.Process(target=display_user_data_frame, args=(self.user_data,))
@@ -227,7 +226,6 @@ class GStreamerApp:
 
         # Set pipeline to PLAYING state
         self.pipeline.set_state(Gst.State.PLAYING)
-
         # Dump dot file
         if self.options_menu.dump_dot:
             GLib.timeout_add_seconds(3, self.dump_dot_file)
